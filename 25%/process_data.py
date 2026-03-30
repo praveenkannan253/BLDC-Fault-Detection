@@ -7,8 +7,8 @@ from scipy.stats import kurtosis
 from scipy.fft import fft, fftfreq
 
 # Configuration
-DATA_DIR = "d:/Desktop/25%/25%"
-OUTPUT_CSV = "d:/Desktop/25%/25%/bldc_ml_dataset.csv"
+DATA_DIR = "d:/Desktop/BLDC/25%"
+OUTPUT_CSV = "d:/Desktop/BLDC/25%/bldc_ml_dataset.csv"
 TS_STEP = 10e-6  # 10 us uniform sampling rate
 START_TIME = 0.02  # seconds
 END_TIME = 0.215  # seconds
@@ -134,7 +134,7 @@ def process_file(filepath):
                 feats['label'] = 'Healthy'
             elif temp in [110, 120]:
                 feats['label'] = 'Degrading'
-            elif temp in [130, 140]:
+            elif temp is not None and temp >= 130:
                 feats['label'] = 'Short_Circuit'
             else:
                 feats['label'] = 'Unknown'
@@ -146,7 +146,7 @@ def process_file(filepath):
     return all_features
 
 def main():
-    files = glob.glob(os.path.join(DATA_DIR, "BLDCM test@*.txt"))
+    files = glob.glob(os.path.join(DATA_DIR, "**", "BLDCM test@*.txt"), recursive=True)
     dataset = []
     
     for f in files:

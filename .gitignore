@@ -1,7 +1,9 @@
+# Ignore heavy simulation data
+**/*.txt
+**/*.csv
+# Ignore Python cache and system files
 __pycache__/
-*.joblib
-*.pkl
-.venv/
-venv/
-*.DS_Store
-*.txt
+*.py[cod]
+*$py.class
+.DS_Store
+Thumbs.db
